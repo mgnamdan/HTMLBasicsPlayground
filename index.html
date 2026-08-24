@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="A classroom HTML lab using a portfolio and LP position interface as its applied example."
+  >
+  <title>HTML Crash Course Lab</title>
+  <script src="demo.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <p><small>JAS-101 / JAS-102 • Week 2 • HTML Crash Course</small></p>
+    <h1>HTML Crash Course Lab</h1>
+    <p><strong>Applied example:</strong> Structuring a portfolio and LP position interface</p>
+
+    <nav aria-label="Page sections">
+      <a href="#lesson">1. Information</a> |
+      <a href="#demo">2. Live demo</a> |
+      <a href="#exercises">3. Exercises</a> |
+      <a href="#summary">Summary</a>
+    </nav>
+    <hr>
+  </header>
+
+  <main>
+    <section aria-labelledby="objectives-heading">
+      <h2 id="objectives-heading">Learning objectives</h2>
+      <p>By the end of this lab, you should be able to:</p>
+      <ul>
+        <li>Explain the role HTML plays in a webpage.</li>
+        <li>Identify elements, tags, content, and attributes.</li>
+        <li>Describe an HTML document as a tree of connected objects.</li>
+        <li>Create elements and organize them through nesting.</li>
+        <li>Use several common semantic HTML elements.</li>
+        <li>Edit HTML source and predict how the browser will render it.</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <section id="lesson" aria-labelledby="lesson-heading">
+      <header>
+        <p><small>PART 1</small></p>
+        <h2 id="lesson-heading">Information: the HTML layer</h2>
+      </header>
+
+      <article aria-labelledby="responsibility-heading">
+        <h3 id="responsibility-heading">What HTML is responsible for</h3>
+        <p>
+          A webpage begins as a document. HTML identifies the information and
+          controls that belong in that document, then organizes them into a
+          meaningful structure.
+        </p>
+        <blockquote>
+          <p><strong>HTML defines what exists and how it is organized.</strong></p>
+        </blockquote>
+        <p>
+          HTML can establish that a portfolio contains a heading, a summary, a
+          holdings table, a policy note, and a form. CSS will later control their
+          visual presentation. JavaScript will later update data, perform
+          calculations, validate input, and respond to user actions.
+        </p>
+      </article>
+
+      <article aria-labelledby="document-heading">
+        <h3 id="document-heading">The structure of a complete document</h3>
+        <pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Page title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Visible page content begins here&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <dl>
+          <dt><code>&lt;!doctype html&gt;</code></dt>
+          <dd>Tells the browser to interpret the document as modern HTML.</dd>
+          <dt><code>&lt;html&gt;</code></dt>
+          <dd>Contains the entire HTML document.</dd>
+          <dt><code>&lt;head&gt;</code></dt>
+          <dd>Contains information about the document.</dd>
+          <dt><code>&lt;body&gt;</code></dt>
+          <dd>Contains the document content presented to the user.</dd>
+        </dl>
+      </article>
+
+      <article aria-labelledby="element-heading">
+        <h3 id="element-heading">Elements, tags, content, and attributes</h3>
+        <pre><code>&lt;section data-state="active"&gt;Position content&lt;/section&gt;
+└──────┘ └─────────────────┘ └──────────────┘ └─────────┘
+opening       attribute          content       closing
+  tag                                             tag</code></pre>
+        <p>
+          The opening and closing tags establish the boundaries of the element.
+          Content appears inside it. Attributes attach additional information or
+          configuration to the element.
+        </p>
+        <p>
+          Some elements, including <code>&lt;meta&gt;</code>, <code>&lt;input&gt;</code>,
+          and <code>&lt;hr&gt;</code>, do not wrap content and therefore do not use a
+          closing tag.
+        </p>
+      </article>
+
+      <article aria-labelledby="dom-heading">
+        <h3 id="dom-heading">HTML becomes a tree of objects</h3>
+        <p>
+          The browser parses the source and constructs a
+          <strong>Document Object Model</strong>, usually shortened to
+          <abbr title="Document Object Model">DOM</abbr>.
+        </p>
+        <pre><code>document
+└── html
+    ├── head
+    │   └── title
+    └── body
+        ├── header
+        │   ├── h1
+        │   └── p
+        └── main
+            └── section
+                ├── h2
+                └── table</code></pre>
+        <dl>
+          <dt><strong>Parent</strong></dt>
+          <dd>An element that directly contains another element.</dd>
+          <dt><strong>Child</strong></dt>
+          <dd>An element directly contained by another element.</dd>
+          <dt><strong>Sibling</strong></dt>
+          <dd>Elements that share the same parent.</dd>
+          <dt><strong>Descendant</strong></dt>
+          <dd>An element nested anywhere inside another element.</dd>
+        </dl>
+      </article>
+
+      <article aria-labelledby="common-heading">
+        <h3 id="common-heading">Common elements used in this lab</h3>
+        <table>
+          <caption>Elements and their semantic purposes</caption>
+          <thead>
+            <tr>
+              <th scope="col">Element</th>
+              <th scope="col">Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><code>&lt;header&gt;</code></th>
+              <td>Introduces a page or section.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;section&gt;</code></th>
+              <td>Groups content around a related topic.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;p&gt;</code></th>
+              <td>Represents a paragraph.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code></th>
+              <td>Represent unordered and ordered lists.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;dl&gt;</code></th>
+              <td>Associates terms with descriptions or values.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;table&gt;</code></th>
+              <td>Organizes records with shared fields into rows and columns.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;form&gt;</code></th>
+              <td>Groups controls used to collect user input.</td>
+            </tr>
+            <tr>
+              <th scope="row"><code>&lt;details&gt;</code></th>
+              <td>Provides a native expandable disclosure.</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article aria-labelledby="example-heading">
+        <h3 id="example-heading">Applied example: static position data</h3>
+        <p>
+          This table contains classroom data for several LP position records.
+          HTML supplies the records and their meaning; it does not retrieve or
+          update the values.
+        </p>
+        <table>
+          <caption>Sample WETH/USDC position register</caption>
+          <thead>
+            <tr>
+              <th scope="col">Position</th>
+              <th scope="col">Lower bound</th>
+              <th scope="col">Upper bound</th>
+              <th scope="col">Reference price</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><data value="LP-104">LP-104</data></th>
+              <td>$2,850</td>
+              <td>$3,450</td>
+              <td>$3,210</td>
+              <td><mark>In range</mark></td>
+            </tr>
+            <tr>
+              <th scope="row"><data value="LP-105">LP-105</data></th>
+              <td>$3,450</td>
+              <td>$4,100</td>
+              <td>$3,210</td>
+              <td>Below range</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><small>All financial values on this page are static sample data for classroom use.</small></p>
+      </article>
+    </section>
+
+    <hr>
+
+    <section id="demo" aria-labelledby="demo-heading">
+      <header>
+        <p><small>PART 2</small></p>
+        <h2 id="demo-heading">Live demo: edit and render an HTML document</h2>
+      </header>
+
+      <p>The demo follows a simple cycle:</p>
+      <ol>
+        <li>Edit the HTML source in Panel A.</li>
+        <li>Select <strong>Render document</strong>.</li>
+        <li>Compare the source with the document in Panel B.</li>
+      </ol>
+
+      <form id="demo-form">
+        <fieldset>
+          <legend><strong>Panel A — Editable HTML source</strong></legend>
+          <label for="source-editor"><strong>LP position summary document</strong></label>
+          <br>
+          <textarea id="source-editor" name="source" rows="36" cols="100" wrap="off" spellcheck="false">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Position Summary LP-104&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Position LP-104&lt;/h1&gt;
+    &lt;p&gt;Pool: WETH/USDC&lt;/p&gt;
+    &lt;p&gt;Status: &lt;mark&gt;In range&lt;/mark&gt;&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;article
+      data-position-id="LP-104"
+      data-lower-bound="2850"
+      data-upper-bound="3450"
+    &gt;
+      &lt;section&gt;
+        &lt;h2&gt;Portfolio summary&lt;/h2&gt;
+        &lt;dl&gt;
+          &lt;dt&gt;Net capital contributed&lt;/dt&gt;
+          &lt;dd&gt;$10,000.00&lt;/dd&gt;
+          &lt;dt&gt;Current portfolio value&lt;/dt&gt;
+          &lt;dd&gt;$10,526.40&lt;/dd&gt;
+          &lt;dt&gt;Strategy profit/loss&lt;/dt&gt;
+          &lt;dd&gt;&lt;strong&gt;+$526.40&lt;/strong&gt;&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/section&gt;
+
+      &lt;section&gt;
+        &lt;h2&gt;Range&lt;/h2&gt;
+        &lt;p&gt;Lower bound: $2,850&lt;/p&gt;
+        &lt;p&gt;Reference price: $3,210&lt;/p&gt;
+        &lt;p&gt;Upper bound: $3,450&lt;/p&gt;
+        &lt;meter min="2850" max="3450" value="3210"&gt;$3,210&lt;/meter&gt;
+      &lt;/section&gt;
+
+      &lt;section&gt;
+        &lt;h2&gt;Position balances&lt;/h2&gt;
+        &lt;table&gt;
+          &lt;caption&gt;Assets assigned to LP-104&lt;/caption&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th scope="col"&gt;Asset&lt;/th&gt;
+              &lt;th scope="col"&gt;Quantity&lt;/th&gt;
+              &lt;th scope="col"&gt;Recorded value&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;th scope="row"&gt;WETH&lt;/th&gt;
+              &lt;td&gt;1.42&lt;/td&gt;
+              &lt;td&gt;$4,558.20&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;th scope="row"&gt;USDC&lt;/th&gt;
+              &lt;td&gt;4,912.30&lt;/td&gt;
+              &lt;td&gt;$4,912.30&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/section&gt;
+
+      &lt;details open&gt;
+        &lt;summary&gt;&lt;strong&gt;Current policy note&lt;/strong&gt;&lt;/summary&gt;
+        &lt;ol&gt;
+          &lt;li&gt;Confirm that the reference price remains within range.&lt;/li&gt;
+          &lt;li&gt;Monitor fees and estimated execution costs.&lt;/li&gt;
+          &lt;li&gt;Review the position if a boundary is crossed.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/details&gt;
+
+      &lt;section&gt;
+        &lt;h2&gt;Proposed action&lt;/h2&gt;
+        &lt;form&gt;
+          &lt;label&gt;
+            &lt;input type="radio" name="action" value="hold" checked&gt;
+            Hold and monitor
+          &lt;/label&gt;
+          &lt;br&gt;
+          &lt;label&gt;
+            &lt;input type="radio" name="action" value="review"&gt;
+            Review position
+          &lt;/label&gt;
+          &lt;p&gt;&lt;button type="button" disabled&gt;Submit action&lt;/button&gt;&lt;/p&gt;
+        &lt;/form&gt;
+        &lt;p&gt;&lt;small&gt;This control will need JavaScript before it can perform an action.&lt;/small&gt;&lt;/p&gt;
+      &lt;/section&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;hr&gt;
+    &lt;p&gt;&lt;small&gt;Static classroom example. No live market connection.&lt;/small&gt;&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+          <p>
+            <button type="submit">Render document</button>
+            <button type="reset">Restore starting source</button>
+          </p>
+          <p>
+            <strong>Demo status:</strong>
+            <output id="demo-status" for="source-editor">Awaiting render.</output>
+          </p>
+        </fieldset>
+      </form>
+
+      <fieldset>
+        <legend><strong>Panel B — Rendered document</strong></legend>
+        <p>
+          <small>
+            The preview is sandboxed. It renders HTML but does not run scripts
+            added to the editable source.
+          </small>
+        </p>
+        <iframe
+          id="rendered-document"
+          title="Rendered LP position summary"
+          width="100%"
+          height="680"
+          sandbox=""
+          referrerpolicy="no-referrer"
+        ></iframe>
+        <noscript>
+          <p>The editable preview requires the small JavaScript demo bridge.</p>
+        </noscript>
+      </fieldset>
+    </section>
+
+    <hr>
+
+    <section id="exercises" aria-labelledby="exercises-heading">
+      <header>
+        <p><small>PART 3</small></p>
+        <h2 id="exercises-heading">Exercises</h2>
+      </header>
+
+      <h3>Stage A: work inside the live demo</h3>
+      <p>
+        Complete these exercises in Panel A above. Render after every change and
+        compare your source with the result.
+      </p>
+
+      <details open>
+        <summary><strong>Exercise 1 — Change existing content</strong></summary>
+        <ol>
+          <li>Change the position ID from LP-104 to LP-200.</li>
+          <li>Change the pool name.</li>
+          <li>Change the recorded profit/loss.</li>
+          <li>Render and identify what changed without changing any tags.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 2 — Add an element</strong></summary>
+        <p>
+          Add a paragraph beneath the main heading that identifies a fictional
+          account owner. Then add a new item to the policy note's ordered list.
+        </p>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 3 — Add a table record</strong></summary>
+        <p>
+          Add a third row to the balances table. Include an asset heading,
+          quantity, and recorded value. Follow the structure of the existing rows.
+        </p>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 4 — Create and nest a section</strong></summary>
+        <p>
+          Add a new section titled <strong>Fees and costs</strong>. Inside it,
+          create an unordered list containing collected fees, uncollected fees,
+          gas costs, and swap costs. Nest the two cost items under an
+          <strong>Execution costs</strong> list item.
+        </p>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 5 — Modify attributes</strong></summary>
+        <ul>
+          <li>Change the meter's <code>value</code>.</li>
+          <li>Remove <code>open</code> from <code>&lt;details&gt;</code>.</li>
+          <li>Remove <code>disabled</code> from the button.</li>
+          <li>Add <code>data-status="watch"</code> to the article.</li>
+        </ul>
+        <p>
+          Which attributes cause an immediate visible or native behavior change?
+          Which simply store information for later use?
+        </p>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 6 — Observe browser error recovery</strong></summary>
+        <p>
+          Save a working copy of the demo source. Remove one closing tag, render
+          the document, and inspect the result. Restore the tag afterward.
+        </p>
+      </details>
+
+      <h3>Stage B: open and modify this webpage's source code</h3>
+      <p>
+        The live demo changes a document contained inside the page. The remaining
+        exercises change the actual page. Open <code>index.html</code> in your
+        code editor, save after each change, and refresh the browser.
+      </p>
+
+      <details open>
+        <summary><strong>Exercise 7 — Locate the page's major objects</strong></summary>
+        <ol>
+          <li>Find the page's top-level <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>.</li>
+          <li>Find the three sections with IDs <code>lesson</code>, <code>demo</code>, and <code>exercises</code>.</li>
+          <li>Identify the parent of those sections.</li>
+          <li>Find the script element that connects <code>demo.js</code>.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 8 — Make a small page-level edit</strong></summary>
+        <p>
+          Change the page's main heading and the text beneath it. Save
+          <code>index.html</code>, refresh the browser, and confirm that you edited
+          the actual page rather than the document inside the demo.
+        </p>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 9 — Extend the position register</strong></summary>
+        <p>
+          Find the sample position register in Part 1 and add a third position.
+          Preserve its heading cells, data cells, and column order.
+        </p>
+      </details>
+
+      <details>
+        <summary><strong>Exercise 10 — Add a new page section</strong></summary>
+        <ol>
+          <li>Add a section immediately before the Summary section.</li>
+          <li>Give it the ID <code>reflection</code>.</li>
+          <li>Add a heading, one paragraph, and a list of three HTML concepts you learned.</li>
+          <li>Add a <code>Reflection</code> anchor to the navigation at the top of the page.</li>
+          <li>Save, refresh, and test the new navigation link.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><strong>Final extension — Add your own exercise to the lab</strong></summary>
+        <p>
+          Add another <code>&lt;details&gt;</code> element to this exercise section.
+          Give it a <code>&lt;summary&gt;</code> and instructions that require a
+          classmate to add or reorganize HTML elements. Exchange exercises and
+          complete each other's changes.
+        </p>
+      </details>
+    </section>
+
+    <hr>
+
+    <section id="summary" aria-labelledby="summary-heading">
+      <header>
+        <h2 id="summary-heading">Summary and next layer</h2>
+      </header>
+      <form>
+        <fieldset>
+          <legend><strong>HTML readiness check</strong></legend>
+          <p><label><input type="checkbox"> I can identify an element and its tags.</label></p>
+          <p><label><input type="checkbox"> I can add an element and place it inside the correct parent.</label></p>
+          <p><label><input type="checkbox"> I can explain parent, child, and sibling relationships.</label></p>
+          <p><label><input type="checkbox"> I can distinguish content from an attribute.</label></p>
+          <p><label><input type="checkbox"> I can outline a complete HTML document.</label></p>
+        </fieldset>
+      </form>
+      <p>
+        The portfolio example now has headings, sections, records, range data,
+        policy notes, and controls. It still lacks deliberate visual design,
+        current market data, calculations, validation, interaction, and storage.
+      </p>
+      <p>
+        <strong>Next:</strong> the CSS crash course will control the presentation
+        of this structure without changing what its content means.
+      </p>
+      <p><a href="#lesson">Return to Part 1</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <hr>
+    <p><small>JAS-101 / JAS-102 • Week 2 • HTML Crash Course</small></p>
+  </footer>
+</body>
+</html>
